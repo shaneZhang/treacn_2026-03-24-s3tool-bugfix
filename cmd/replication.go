@@ -45,10 +45,14 @@ var replicationGetCmd = &cobra.Command{
 		cmd.Printf("角色ARN: %s\n", *output.ReplicationConfiguration.Role)
 		for i, rule := range output.ReplicationConfiguration.Rules {
 			cmd.Printf("规则 %d:\n", i+1)
-			cmd.Printf("  ID: %s\n", *rule.ID)
+			if rule.ID != nil {
+				cmd.Printf("  ID: %s\n", *rule.ID)
+			}
 			cmd.Printf("  状态: %s\n", rule.Status)
-			cmd.Printf("  前缀: %s\n", rule.Prefix)
-			if dest := rule.Destination; dest != nil {
+			if rule.Prefix != nil {
+				cmd.Printf("  前缀: %s\n", *rule.Prefix)
+			}
+			if dest := rule.Destination; dest != nil && dest.Bucket != nil {
 				cmd.Printf("  目标存储桶: %s\n", *dest.Bucket)
 			}
 		}

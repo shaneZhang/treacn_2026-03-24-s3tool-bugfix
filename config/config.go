@@ -13,13 +13,13 @@ import (
 )
 
 type Config struct {
-	Profile      string `mapstructure:"profile"`
-	Region       string `mapstructure:"region"`
-	Endpoint     string `mapstructure:"endpoint"`
-	AccessKey    string `mapstructure:"access_key"`
-	SecretKey    string `mapstructure:"secret_key"`
-	ForcePathStyle bool `mapstructure:"force_path_style"`
-	UseAccelerate bool `mapstructure:"use_accelerate"`
+	Profile        string `mapstructure:"profile"`
+	Region         string `mapstructure:"region"`
+	Endpoint       string `mapstructure:"endpoint"`
+	AccessKey      string `mapstructure:"access_key"`
+	SecretKey      string `mapstructure:"secret_key"`
+	ForcePathStyle bool   `mapstructure:"force_path_style"`
+	UseAccelerate  bool   `mapstructure:"use_accelerate"`
 }
 
 var GlobalConfig Config
@@ -105,7 +105,6 @@ func GetS3Client(ctx context.Context) (*s3.Client, error) {
 	if GlobalConfig.Endpoint != "" {
 		opts = append(opts, func(o *s3.Options) {
 			o.BaseEndpoint = aws.String(GlobalConfig.Endpoint)
-			o.UsePathStyle = GlobalConfig.ForcePathStyle
 		})
 	}
 

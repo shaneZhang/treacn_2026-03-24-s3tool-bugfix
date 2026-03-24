@@ -40,7 +40,6 @@ var objectListCmd = &cobra.Command{
 		maxKeys, _ := cmd.Flags().GetInt("max-keys")
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"键名", "大小", "最后修改", "存储类型"})
 
 		count := 0
@@ -240,7 +239,6 @@ var objectInfoCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"属性", "值"})
 		t.AppendRow([]interface{}{"键名", key})
 		t.AppendRow([]interface{}{"大小", formatBytes(*output.ContentLength)})

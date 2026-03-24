@@ -38,11 +38,30 @@ var aclBucketGetCmd = &cobra.Command{
 			return fmt.Errorf("获取存储桶ACL失败: %w", err)
 		}
 
-		cmd.Printf("所有者: %s (%s)\n", *output.Owner.DisplayName, *output.Owner.ID)
+		if output.Owner != nil {
+			displayName := ""
+			if output.Owner.DisplayName != nil {
+				displayName = *output.Owner.DisplayName
+			}
+			id := ""
+			if output.Owner.ID != nil {
+				id = *output.Owner.ID
+			}
+			cmd.Printf("所有者: %s (%s)\n", displayName, id)
+		}
+
 		cmd.Println("授权:")
 		for _, grant := range output.Grants {
 			grantee := grant.Grantee
-			cmd.Printf("  - %s: %s\n", grant.Permission, *grantee.DisplayName)
+			displayName := ""
+			if grantee != nil && grantee.DisplayName != nil {
+				displayName = *grantee.DisplayName
+			} else if grantee != nil && grantee.URI != nil {
+				displayName = *grantee.URI
+			} else if grantee != nil && grantee.ID != nil {
+				displayName = *grantee.ID
+			}
+			cmd.Printf("  - %s: %s\n", grant.Permission, displayName)
 		}
 		return nil
 	},
@@ -95,11 +114,30 @@ var aclObjectGetCmd = &cobra.Command{
 			return fmt.Errorf("获取对象ACL失败: %w", err)
 		}
 
-		cmd.Printf("所有者: %s (%s)\n", *output.Owner.DisplayName, *output.Owner.ID)
+		if output.Owner != nil {
+			displayName := ""
+			if output.Owner.DisplayName != nil {
+				displayName = *output.Owner.DisplayName
+			}
+			id := ""
+			if output.Owner.ID != nil {
+				id = *output.Owner.ID
+			}
+			cmd.Printf("所有者: %s (%s)\n", displayName, id)
+		}
+
 		cmd.Println("授权:")
 		for _, grant := range output.Grants {
 			grantee := grant.Grantee
-			cmd.Printf("  - %s: %s\n", grant.Permission, *grantee.DisplayName)
+			displayName := ""
+			if grantee != nil && grantee.DisplayName != nil {
+				displayName = *grantee.DisplayName
+			} else if grantee != nil && grantee.URI != nil {
+				displayName = *grantee.URI
+			} else if grantee != nil && grantee.ID != nil {
+				displayName = *grantee.ID
+			}
+			cmd.Printf("  - %s: %s\n", grant.Permission, displayName)
 		}
 		return nil
 	},

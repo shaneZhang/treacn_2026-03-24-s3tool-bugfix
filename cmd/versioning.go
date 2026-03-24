@@ -38,8 +38,14 @@ var versioningGetCmd = &cobra.Command{
 			return fmt.Errorf("获取版本控制状态失败: %w", err)
 		}
 
-		status := output.Status
-		mfaDelete := output.MFADelete
+		status := string(output.Status)
+		if status == "" {
+			status = "未启用"
+		}
+		mfaDelete := string(output.MFADelete)
+		if mfaDelete == "" {
+			mfaDelete = "未启用"
+		}
 
 		cmd.Printf("存储桶: %s\n", bucket)
 		cmd.Printf("版本控制状态: %s\n", status)

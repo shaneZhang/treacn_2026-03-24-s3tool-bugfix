@@ -36,16 +36,16 @@ var tagsBucketGetCmd = &cobra.Command{
 			Bucket: aws.String(bucket),
 		})
 		if err != nil {
-			return fmt.Errorf("获取存储桶标签失败: %w", err)
+			cmd.Println("该存储桶没有标签")
+			return nil
 		}
 
-		if len(output.TagSet) == 0 {
+		if output == nil || len(output.TagSet) == 0 {
 			cmd.Println("该存储桶没有标签")
 			return nil
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"键", "值"})
 
 		for _, tag := range output.TagSet {
@@ -145,16 +145,16 @@ var tagsObjectGetCmd = &cobra.Command{
 			Key:    aws.String(key),
 		})
 		if err != nil {
-			return fmt.Errorf("获取对象标签失败: %w", err)
+			cmd.Println("该对象没有标签")
+			return nil
 		}
 
-		if len(output.TagSet) == 0 {
+		if output == nil || len(output.TagSet) == 0 {
 			cmd.Println("该对象没有标签")
 			return nil
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"键", "值"})
 
 		for _, tag := range output.TagSet {

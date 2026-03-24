@@ -35,16 +35,16 @@ var lifecycleGetCmd = &cobra.Command{
 			Bucket: aws.String(bucket),
 		})
 		if err != nil {
-			return fmt.Errorf("获取生命周期规则失败: %w", err)
+			cmd.Println("该存储桶没有设置生命周期规则")
+			return nil
 		}
 
-		if output.Rules == nil || len(output.Rules) == 0 {
+		if output == nil || output.Rules == nil || len(output.Rules) == 0 {
 			cmd.Println("该存储桶没有设置生命周期规则")
 			return nil
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"ID", "状态", "前缀", "过期天数", "转换天数", "存储类型"})
 
 		for _, rule := range output.Rules {
