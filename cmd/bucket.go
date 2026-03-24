@@ -36,7 +36,6 @@ var bucketListCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"桶名称", "创建时间"})
 
 		for _, bucket := range output.Buckets {
@@ -69,7 +68,15 @@ var bucketCreateCmd = &cobra.Command{
 			Bucket: aws.String(bucketName),
 		}
 
-		if region := config.GlobalConfig.Region; region != "" && region != "us-east-1" {
+		// 优先使用命令行指定的区域，其次使用配置文件中的区域
+		region, _ := cmd.Flags().GetString("region")
+		if region == "" {
+			region = config.GlobalConfig.Region
+		}
+
+		// 只有在区域不是 us-east-1 时才需要设置 LocationConstraint
+		// us-east-1 是默认区域，不需要指定 LocationConstraint
+		if region != "" && region != "us-east-1" {
 			input.CreateBucketConfiguration = &types.CreateBucketConfiguration{
 				LocationConstraint: types.BucketLocationConstraint(region),
 			}
@@ -124,16 +131,58 @@ var bucketInfoCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"属性", "值"})
 
+		// 获取存储桶区域
+		locationOutput, err := client.GetBucketLocation(ctx, &s3.GetBucketLocationInput{
+			Bucket: aws.String(bucketName),
+		})
+		if err == nil {
+			location := string(locationOutput.LocationConstraint)
+			if location == "" {
+				location = "us-east-1"
+			}
+			t.AppendRow([]interface{}{"区域", location})
+		}
+
+		// 获取存储桶创建时间
+		listOutput, err := client.ListBuckets(ctx, &s3.ListBucketsInput{})
+		if err == nil {
+			for _, bucket := range listOutput.Buckets {
+				if *bucket.Name == bucketName {
+					t.AppendRow([]interface{}{"创建时间", bucket.CreationDate.Format("2006-01-02 15:04:05")})
+					break
+				}
+			}
+		}
+
+		// 获取版本控制状态
+		versionOutput, err := client.GetBucketVersioning(ctx, &s3.GetBucketVersioningInput{
+			Bucket: aws.String(bucketName),
+		})
+		if err == nil {
+			status := "未启用"
+			if versionOutput.Status == types.BucketVersioningStatusEnabled {
+				status = "已启用"
+			} else if versionOutput.Status == types.BucketVersioningStatusSuspended {
+				status = "已暂停"
+			}
+			t.AppendRow([]interface{}{"版本控制", status})
+		}
+
+		// 获取标签
 		tagsOutput, err := client.GetBucketTagging(ctx, &s3.GetBucketTaggingInput{
 			Bucket: aws.String(bucketName),
 		})
 		if err == nil && len(tagsOutput.TagSet) > 0 {
-			for _, tag := range tagsOutput.TagSet {
-				t.AppendRow([]interface{}{*tag.Key, *tag.Value})
+			tags := ""
+			for i, tag := range tagsOutput.TagSet {
+				if i > 0 {
+					tags += ", "
+				}
+				tags += fmt.Sprintf("%s=%s", *tag.Key, *tag.Value)
 			}
+			t.AppendRow([]interface{}{"标签", tags})
 		}
 
 		cmd.Printf("存储桶: %s\n", bucketName)
@@ -231,4 +280,7 @@ func init() {
 	bucketCmd.AddCommand(bucketInfoCmd)
 	bucketCmd.AddCommand(bucketLocationCmd)
 	bucketCmd.AddCommand(bucketEmptyCmd)
+
+	// 为 bucket create 命令添加 region 参数
+	bucketCreateCmd.Flags().StringP("region", "r", "", "指定存储桶区域(覆盖配置文件)")
 }

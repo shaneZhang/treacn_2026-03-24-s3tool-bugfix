@@ -44,7 +44,6 @@ var lifecycleGetCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"ID", "状态", "前缀", "过期天数", "转换天数", "存储类型"})
 
 		for _, rule := range output.Rules {
