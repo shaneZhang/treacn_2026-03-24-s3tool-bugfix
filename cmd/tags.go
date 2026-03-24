@@ -45,7 +45,6 @@ var tagsBucketGetCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"键", "值"})
 
 		for _, tag := range output.TagSet {
@@ -154,7 +153,6 @@ var tagsObjectGetCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"键", "值"})
 
 		for _, tag := range output.TagSet {

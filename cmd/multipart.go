@@ -1,8 +1,10 @@
 package cmd
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"os"
 	"strconv"
 
@@ -74,25 +76,26 @@ var multipartUploadCmd = &cobra.Command{
 
 		partSize, _ := cmd.Flags().GetInt("part-size")
 
+		// 创建指定大小的缓冲区并读取文件内容
 		buf := make([]byte, partSize)
 		n, err := file.Read(buf)
-		if err != nil && err.Error() != "EOF" {
+		if err != nil && err != io.EOF {
 			return fmt.Errorf("读取文件失败: %w", err)
 		}
 
+		// 只上传实际读取到的字节数
 		resp, err := client.UploadPart(ctx, &s3.UploadPartInput{
 			Bucket:     aws.String(bucket),
 			Key:        aws.String(key),
 			UploadId:   aws.String(uploadID),
 			PartNumber: aws.Int32(int32(partNum)),
-			Body:       os.Stdin,
+			Body:       bytes.NewReader(buf[:n]),
 		})
 		if err != nil {
 			return fmt.Errorf("上传分片失败: %w", err)
 		}
 
 		cmd.Printf("分片 %d 上传成功, ETag: %s\n", partNum, *resp.ETag)
-		_ = n
 		return nil
 	},
 }
@@ -120,7 +123,6 @@ var multipartListCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"分片编号", "ETag", "大小"})
 
 		for _, part := range resp.Parts {

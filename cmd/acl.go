@@ -38,11 +38,35 @@ var aclBucketGetCmd = &cobra.Command{
 			return fmt.Errorf("获取存储桶ACL失败: %w", err)
 		}
 
-		cmd.Printf("所有者: %s (%s)\n", *output.Owner.DisplayName, *output.Owner.ID)
+		// 安全地获取所有者信息
+		ownerDisplayName := "未知"
+		ownerID := "未知"
+		if output.Owner != nil {
+			if output.Owner.DisplayName != nil {
+				ownerDisplayName = *output.Owner.DisplayName
+			}
+			if output.Owner.ID != nil {
+				ownerID = *output.Owner.ID
+			}
+		}
+		cmd.Printf("所有者: %s (%s)\n", ownerDisplayName, ownerID)
 		cmd.Println("授权:")
 		for _, grant := range output.Grants {
 			grantee := grant.Grantee
-			cmd.Printf("  - %s: %s\n", grant.Permission, *grantee.DisplayName)
+			granteeDisplayName := "未知"
+			granteeID := "未知"
+			if grantee != nil {
+				if grantee.DisplayName != nil {
+					granteeDisplayName = *grantee.DisplayName
+				}
+				if grantee.ID != nil {
+					granteeID = *grantee.ID
+				}
+				if grantee.URI != nil {
+					granteeDisplayName = *grantee.URI
+				}
+			}
+			cmd.Printf("  - %s: %s (%s)\n", grant.Permission, granteeDisplayName, granteeID)
 		}
 		return nil
 	},
@@ -95,11 +119,35 @@ var aclObjectGetCmd = &cobra.Command{
 			return fmt.Errorf("获取对象ACL失败: %w", err)
 		}
 
-		cmd.Printf("所有者: %s (%s)\n", *output.Owner.DisplayName, *output.Owner.ID)
+		// 安全地获取所有者信息
+		ownerDisplayName := "未知"
+		ownerID := "未知"
+		if output.Owner != nil {
+			if output.Owner.DisplayName != nil {
+				ownerDisplayName = *output.Owner.DisplayName
+			}
+			if output.Owner.ID != nil {
+				ownerID = *output.Owner.ID
+			}
+		}
+		cmd.Printf("所有者: %s (%s)\n", ownerDisplayName, ownerID)
 		cmd.Println("授权:")
 		for _, grant := range output.Grants {
 			grantee := grant.Grantee
-			cmd.Printf("  - %s: %s\n", grant.Permission, *grantee.DisplayName)
+			granteeDisplayName := "未知"
+			granteeID := "未知"
+			if grantee != nil {
+				if grantee.DisplayName != nil {
+					granteeDisplayName = *grantee.DisplayName
+				}
+				if grantee.ID != nil {
+					granteeID = *grantee.ID
+				}
+				if grantee.URI != nil {
+					granteeDisplayName = *grantee.URI
+				}
+			}
+			cmd.Printf("  - %s: %s (%s)\n", grant.Permission, granteeDisplayName, granteeID)
 		}
 		return nil
 	},
