@@ -72,27 +72,18 @@ var multipartUploadCmd = &cobra.Command{
 		}
 		defer file.Close()
 
-		partSize, _ := cmd.Flags().GetInt("part-size")
-
-		buf := make([]byte, partSize)
-		n, err := file.Read(buf)
-		if err != nil && err.Error() != "EOF" {
-			return fmt.Errorf("读取文件失败: %w", err)
-		}
-
 		resp, err := client.UploadPart(ctx, &s3.UploadPartInput{
-			Bucket:     aws.String(bucket),
-			Key:        aws.String(key),
-			UploadId:   aws.String(uploadID),
-			PartNumber: aws.Int32(int32(partNum)),
-			Body:       os.Stdin,
-		})
-		if err != nil {
-			return fmt.Errorf("上传分片失败: %w", err)
-		}
+		Bucket:     aws.String(bucket),
+		Key:        aws.String(key),
+		UploadId:   aws.String(uploadID),
+		PartNumber: aws.Int32(int32(partNum)),
+		Body:       file,
+	})
+	if err != nil {
+		return fmt.Errorf("上传分片失败: %w", err)
+	}
 
-		cmd.Printf("分片 %d 上传成功, ETag: %s\n", partNum, *resp.ETag)
-		_ = n
+	cmd.Printf("分片 %d 上传成功, ETag: %s\n", partNum, *resp.ETag)
 		return nil
 	},
 }
@@ -120,7 +111,6 @@ var multipartListCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"分片编号", "ETag", "大小"})
 
 		for _, part := range resp.Parts {

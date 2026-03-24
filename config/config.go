@@ -105,7 +105,6 @@ func GetS3Client(ctx context.Context) (*s3.Client, error) {
 	if GlobalConfig.Endpoint != "" {
 		opts = append(opts, func(o *s3.Options) {
 			o.BaseEndpoint = aws.String(GlobalConfig.Endpoint)
-			o.UsePathStyle = GlobalConfig.ForcePathStyle
 		})
 	}
 

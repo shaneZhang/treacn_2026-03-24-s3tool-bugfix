@@ -36,7 +36,6 @@ var bucketListCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"桶名称", "创建时间"})
 
 		for _, bucket := range output.Buckets {
@@ -69,9 +68,11 @@ var bucketCreateCmd = &cobra.Command{
 			Bucket: aws.String(bucketName),
 		}
 
-		if region := config.GlobalConfig.Region; region != "" && region != "us-east-1" {
-			input.CreateBucketConfiguration = &types.CreateBucketConfiguration{
-				LocationConstraint: types.BucketLocationConstraint(region),
+		if config.GlobalConfig.Endpoint == "" {
+			if region := config.GlobalConfig.Region; region != "" && region != "us-east-1" {
+				input.CreateBucketConfiguration = &types.CreateBucketConfiguration{
+					LocationConstraint: types.BucketLocationConstraint(region),
+				}
 			}
 		}
 
@@ -124,15 +125,45 @@ var bucketInfoCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"属性", "值"})
+
+		locationOutput, err := client.GetBucketLocation(ctx, &s3.GetBucketLocationInput{
+			Bucket: aws.String(bucketName),
+		})
+		if err == nil {
+			location := string(locationOutput.LocationConstraint)
+			if location == "" {
+				location = "us-east-1"
+			}
+			t.AppendRow([]interface{}{"区域", location})
+		}
+
+		versioningOutput, err := client.GetBucketVersioning(ctx, &s3.GetBucketVersioningInput{
+			Bucket: aws.String(bucketName),
+		})
+		if err == nil {
+			status := "未启用"
+			if versioningOutput.Status == "Enabled" {
+				status = "已启用"
+			} else if versioningOutput.Status == "Suspended" {
+				status = "已暂停"
+			}
+			t.AppendRow([]interface{}{"版本控制", status})
+		}
+
+		_, err = client.HeadBucket(ctx, &s3.HeadBucketInput{
+			Bucket: aws.String(bucketName),
+		})
+		if err == nil {
+			t.AppendRow([]interface{}{"状态", "存在且可访问"})
+		}
 
 		tagsOutput, err := client.GetBucketTagging(ctx, &s3.GetBucketTaggingInput{
 			Bucket: aws.String(bucketName),
 		})
 		if err == nil && len(tagsOutput.TagSet) > 0 {
 			for _, tag := range tagsOutput.TagSet {
-				t.AppendRow([]interface{}{*tag.Key, *tag.Value})
+				t.AppendRow([]interface{}{"标签: " + *tag.Key, *tag.Value})
 			}
 		}
 

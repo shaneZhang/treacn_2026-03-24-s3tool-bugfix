@@ -40,7 +40,6 @@ var objectListCmd = &cobra.Command{
 		maxKeys, _ := cmd.Flags().GetInt("max-keys")
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"键名", "大小", "最后修改", "存储类型"})
 
 		count := 0
@@ -84,12 +83,12 @@ var objectListCmd = &cobra.Command{
 }
 
 var objectPutCmd = &cobra.Command{
-	Use:   "put [bucket] [key] [file]",
+	Use:   "put [bucket] [file] [key]",
 	Short: "上传对象",
 	Long:  "上传本地文件到 S3 存储桶",
 	Args:  cobra.ExactArgs(3),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		bucket, key, filePath := args[0], args[1], args[2]
+		bucket, filePath, key := args[0], args[1], args[2]
 		ctx := context.Background()
 		client, err := config.GetS3Client(ctx)
 		if err != nil {
@@ -240,7 +239,6 @@ var objectInfoCmd = &cobra.Command{
 		}
 
 		t := table.NewWriter()
-		t.SetOutputMirror(cmd.OutOrStdout())
 		t.AppendHeader(table.Row{"属性", "值"})
 		t.AppendRow([]interface{}{"键名", key})
 		t.AppendRow([]interface{}{"大小", formatBytes(*output.ContentLength)})
