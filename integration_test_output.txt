@@ -1,0 +1,87 @@
+=== RUN   TestBucketCommandIntegration
+--- PASS: TestBucketCommandIntegration (0.00s)
+=== RUN   TestIntegration_Setup
+--- PASS: TestIntegration_Setup (0.00s)
+=== RUN   TestIntegration_BucketList
+    integration_test.go:441: 使用配置文件: /Users/zhangyuqing/.s3tool.yaml
+    integration_test.go:58: 找到 3 个存储桶
+--- PASS: TestIntegration_BucketList (0.12s)
+=== RUN   TestIntegration_BucketCRUD
+    integration_test.go:441: 使用配置文件: /Users/zhangyuqing/.s3tool.yaml
+=== RUN   TestIntegration_BucketCRUD/创建存储桶
+    integration_test.go:76: 存储桶 s3tool-test-20260329-225452 创建成功
+=== RUN   TestIntegration_BucketCRUD/验证存储桶存在
+=== RUN   TestIntegration_BucketCRUD/删除存储桶
+    integration_test.go:97: 存储桶 s3tool-test-20260329-225452 删除成功
+--- PASS: TestIntegration_BucketCRUD (2.21s)
+    --- PASS: TestIntegration_BucketCRUD/创建存储桶 (2.13s)
+    --- PASS: TestIntegration_BucketCRUD/验证存储桶存在 (0.03s)
+    --- PASS: TestIntegration_BucketCRUD/删除存储桶 (0.05s)
+=== RUN   TestIntegration_ObjectCRUD
+    integration_test.go:441: 使用配置文件: /Users/zhangyuqing/.s3tool.yaml
+    integration_test.go:457: 使用测试存储桶: backup
+=== RUN   TestIntegration_ObjectCRUD/上传对象
+    integration_test.go:120: 对象 integration-test/test-object.txt 上传成功
+=== RUN   TestIntegration_ObjectCRUD/下载对象
+    integration_test.go:135: 下载内容验证通过: Hello, S3Tool Integration Test!
+=== RUN   TestIntegration_ObjectCRUD/列出对象
+=== RUN   TestIntegration_ObjectCRUD/复制对象
+    integration_test.go:159: 对象复制成功: integration-test/test-object.txt -> integration-test/copied-object.txt
+=== RUN   TestIntegration_ObjectCRUD/删除对象
+    integration_test.go:175: 对象 integration-test/test-object.txt 删除成功
+--- PASS: TestIntegration_ObjectCRUD (0.37s)
+    --- PASS: TestIntegration_ObjectCRUD/上传对象 (0.05s)
+    --- PASS: TestIntegration_ObjectCRUD/下载对象 (0.04s)
+    --- PASS: TestIntegration_ObjectCRUD/列出对象 (0.05s)
+    --- PASS: TestIntegration_ObjectCRUD/复制对象 (0.08s)
+    --- PASS: TestIntegration_ObjectCRUD/删除对象 (0.04s)
+=== RUN   TestIntegration_PresignURL
+    integration_test.go:441: 使用配置文件: /Users/zhangyuqing/.s3tool.yaml
+    integration_test.go:457: 使用测试存储桶: backup
+=== RUN   TestIntegration_PresignURL/生成GET预签名URL
+    integration_test.go:217: GET预签名URL: https://oss.zhangyuqing.cn/backup/integration-test/presign-test-object.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=RtLN8K1Eg0yIZBMQDTpW%2F20260329%2Fa1283%2Fs3%2Faws4_request&X-Amz-Date=20260329T145455Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=8cf3bb8049b8b2185ff235dc4c845808be13271872c5f229cb9e61567cd5330a
+    integration_test.go:226: 预签名URL访问验证通过
+=== RUN   TestIntegration_PresignURL/生成PUT预签名URL
+    integration_test.go:243: PUT预签名URL: https://oss.zhangyuqing.cn/backup/integration-test/presign-put-test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=RtLN8K1Eg0yIZBMQDTpW%2F20260329%2Fa1283%2Fs3%2Faws4_request&X-Amz-Date=20260329T145455Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&x-id=PutObject&X-Amz-Signature=bd8b7f5ddf61e0f6f1cc16301730f7023f8e65be8971ba1b668df127571ffb58
+--- PASS: TestIntegration_PresignURL (0.40s)
+    --- PASS: TestIntegration_PresignURL/生成GET预签名URL (0.11s)
+    --- PASS: TestIntegration_PresignURL/生成PUT预签名URL (0.11s)
+=== RUN   TestIntegration_FileOperations
+    integration_test.go:441: 使用配置文件: /Users/zhangyuqing/.s3tool.yaml
+    integration_test.go:457: 使用测试存储桶: backup
+=== RUN   TestIntegration_FileOperations/文件上传下载
+    integration_test.go:316: 1MB文件上传成功: integration-test/large-test-file.bin
+    integration_test.go:333: 文件下载MD5校验通过
+--- PASS: TestIntegration_FileOperations (0.77s)
+    --- PASS: TestIntegration_FileOperations/文件上传下载 (0.67s)
+=== RUN   TestIntegration_AclOperations
+    integration_test.go:441: 使用配置文件: /Users/zhangyuqing/.s3tool.yaml
+    integration_test.go:457: 使用测试存储桶: backup
+=== RUN   TestIntegration_AclOperations/获取存储桶ACL
+    integration_test.go:373: 存储桶ACL Owner: 
+=== RUN   TestIntegration_AclOperations/获取对象ACL
+    integration_test.go:383: 对象ACL获取成功，Grants数量: 1
+=== RUN   TestIntegration_AclOperations/设置对象ACL
+    integration_test.go:392: 
+        	Error Trace:	/Users/zhangyuqing/Desktop/treacn_2026-03-24-s3tool-bugfix/cmd/integration_test.go:392
+        	Error:      	Received unexpected error:
+        	            	operation error S3: PutObjectAcl, https response error StatusCode: 501, RequestID: 18A157A58E3D04E8, HostID: dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8, api error NotImplemented: A header you provided implies functionality that is not implemented ()
+        	Test:       	TestIntegration_AclOperations/设置对象ACL
+        	Messages:   	设置对象ACL失败
+--- FAIL: TestIntegration_AclOperations (0.31s)
+    --- PASS: TestIntegration_AclOperations/获取存储桶ACL (0.05s)
+    --- PASS: TestIntegration_AclOperations/获取对象ACL (0.03s)
+    --- FAIL: TestIntegration_AclOperations/设置对象ACL (0.04s)
+=== RUN   TestIntegration_ErrorScenarios
+    integration_test.go:441: 使用配置文件: /Users/zhangyuqing/.s3tool.yaml
+    integration_test.go:457: 使用测试存储桶: backup
+=== RUN   TestIntegration_ErrorScenarios/访问不存在的对象
+    integration_test.go:421: 不存在的对象错误验证通过
+=== RUN   TestIntegration_ErrorScenarios/访问不存在的存储桶
+    integration_test.go:429: 不存在的存储桶错误验证通过
+--- PASS: TestIntegration_ErrorScenarios (0.17s)
+    --- PASS: TestIntegration_ErrorScenarios/访问不存在的对象 (0.03s)
+    --- PASS: TestIntegration_ErrorScenarios/访问不存在的存储桶 (0.03s)
+FAIL
+FAIL	s3tool/cmd	4.360s
+FAIL

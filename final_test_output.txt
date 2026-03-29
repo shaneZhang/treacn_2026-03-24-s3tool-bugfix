@@ -1,0 +1,487 @@
+=== RUN   TestLoadConfig
+=== RUN   TestLoadConfig/加载默认配置
+=== RUN   TestLoadConfig/加载配置文件
+=== RUN   TestLoadConfig/环境变量覆盖配置
+=== RUN   TestLoadConfig/完整配置测试
+--- PASS: TestLoadConfig (0.00s)
+    --- PASS: TestLoadConfig/加载默认配置 (0.00s)
+    --- PASS: TestLoadConfig/加载配置文件 (0.00s)
+    --- PASS: TestLoadConfig/环境变量覆盖配置 (0.00s)
+    --- PASS: TestLoadConfig/完整配置测试 (0.00s)
+=== RUN   TestGetAWSConfig
+=== RUN   TestGetAWSConfig/使用静态凭证
+=== RUN   TestGetAWSConfig/使用profile（无配置文件时可能失败）
+=== RUN   TestGetAWSConfig/最小配置
+--- PASS: TestGetAWSConfig (0.00s)
+    --- PASS: TestGetAWSConfig/使用静态凭证 (0.00s)
+    --- PASS: TestGetAWSConfig/使用profile（无配置文件时可能失败） (0.00s)
+    --- PASS: TestGetAWSConfig/最小配置 (0.00s)
+=== RUN   TestGetS3Client
+=== RUN   TestGetS3Client/标准配置
+=== RUN   TestGetS3Client/自定义endpoint
+=== RUN   TestGetS3Client/使用加速域名
+--- PASS: TestGetS3Client (0.00s)
+    --- PASS: TestGetS3Client/标准配置 (0.00s)
+    --- PASS: TestGetS3Client/自定义endpoint (0.00s)
+    --- PASS: TestGetS3Client/使用加速域名 (0.00s)
+=== RUN   TestGetS3ClientWithBucket
+--- PASS: TestGetS3ClientWithBucket (0.00s)
+=== RUN   TestLoadConfig_FileNotFound
+    config_test.go:252: LoadConfig error (if any): failed to read config file: open nonexistent_config.yaml: no such file or directory
+--- PASS: TestLoadConfig_FileNotFound (0.00s)
+=== RUN   TestLoadConfig_InvalidFormat
+--- PASS: TestLoadConfig_InvalidFormat (0.00s)
+PASS
+ok  	s3tool/config	0.028s
+=== RUN   TestAclBucketGetCommand
+=== RUN   TestAclBucketGetCommand/无参数
+=== RUN   TestAclBucketGetCommand/完整参数
+=== RUN   TestAclBucketGetCommand/参数过多
+--- PASS: TestAclBucketGetCommand (0.00s)
+    --- PASS: TestAclBucketGetCommand/无参数 (0.00s)
+    --- PASS: TestAclBucketGetCommand/完整参数 (0.00s)
+    --- PASS: TestAclBucketGetCommand/参数过多 (0.00s)
+=== RUN   TestAclBucketSetCommand
+=== RUN   TestAclBucketSetCommand/无参数
+=== RUN   TestAclBucketSetCommand/缺少acl参数
+=== RUN   TestAclBucketSetCommand/完整参数
+=== RUN   TestAclBucketSetCommand/参数过多
+--- PASS: TestAclBucketSetCommand (0.00s)
+    --- PASS: TestAclBucketSetCommand/无参数 (0.00s)
+    --- PASS: TestAclBucketSetCommand/缺少acl参数 (0.00s)
+    --- PASS: TestAclBucketSetCommand/完整参数 (0.00s)
+    --- PASS: TestAclBucketSetCommand/参数过多 (0.00s)
+=== RUN   TestAclObjectGetCommand
+=== RUN   TestAclObjectGetCommand/无参数
+=== RUN   TestAclObjectGetCommand/缺少key参数
+=== RUN   TestAclObjectGetCommand/完整参数
+=== RUN   TestAclObjectGetCommand/参数过多
+--- PASS: TestAclObjectGetCommand (0.00s)
+    --- PASS: TestAclObjectGetCommand/无参数 (0.00s)
+    --- PASS: TestAclObjectGetCommand/缺少key参数 (0.00s)
+    --- PASS: TestAclObjectGetCommand/完整参数 (0.00s)
+    --- PASS: TestAclObjectGetCommand/参数过多 (0.00s)
+=== RUN   TestAclObjectSetCommand
+=== RUN   TestAclObjectSetCommand/无参数
+=== RUN   TestAclObjectSetCommand/缺少key参数
+=== RUN   TestAclObjectSetCommand/缺少acl参数
+=== RUN   TestAclObjectSetCommand/完整参数
+=== RUN   TestAclObjectSetCommand/参数过多
+--- PASS: TestAclObjectSetCommand (0.00s)
+    --- PASS: TestAclObjectSetCommand/无参数 (0.00s)
+    --- PASS: TestAclObjectSetCommand/缺少key参数 (0.00s)
+    --- PASS: TestAclObjectSetCommand/缺少acl参数 (0.00s)
+    --- PASS: TestAclObjectSetCommand/完整参数 (0.00s)
+    --- PASS: TestAclObjectSetCommand/参数过多 (0.00s)
+=== RUN   TestAclSubCommands
+=== RUN   TestAclSubCommands/子命令存在:bucket-get
+=== RUN   TestAclSubCommands/子命令存在:bucket-set
+=== RUN   TestAclSubCommands/子命令存在:object-get
+=== RUN   TestAclSubCommands/子命令存在:object-set
+--- PASS: TestAclSubCommands (0.00s)
+    --- PASS: TestAclSubCommands/子命令存在:bucket-get (0.00s)
+    --- PASS: TestAclSubCommands/子命令存在:bucket-set (0.00s)
+    --- PASS: TestAclSubCommands/子命令存在:object-get (0.00s)
+    --- PASS: TestAclSubCommands/子命令存在:object-set (0.00s)
+=== RUN   TestAclCommandHelp
+=== RUN   TestAclCommandHelp/获取指定存储桶的ACL
+=== RUN   TestAclCommandHelp/设置存储桶的ACL
+=== RUN   TestAclCommandHelp/获取指定对象的ACL
+=== RUN   TestAclCommandHelp/设置对象的ACL
+=== RUN   TestAclCommandHelp/管理存储桶和对象的访问控制列表
+--- PASS: TestAclCommandHelp (0.00s)
+    --- PASS: TestAclCommandHelp/获取指定存储桶的ACL (0.00s)
+    --- PASS: TestAclCommandHelp/设置存储桶的ACL (0.00s)
+    --- PASS: TestAclCommandHelp/获取指定对象的ACL (0.00s)
+    --- PASS: TestAclCommandHelp/设置对象的ACL (0.00s)
+    --- PASS: TestAclCommandHelp/管理存储桶和对象的访问控制列表 (0.00s)
+=== RUN   TestAclCommandDocumentation
+--- PASS: TestAclCommandDocumentation (0.00s)
+=== RUN   TestAclCommandShortDescriptions
+--- PASS: TestAclCommandShortDescriptions (0.00s)
+=== RUN   TestBucketListCommand
+=== RUN   TestBucketListCommand/列出多个存储桶
+=== RUN   TestBucketListCommand/空存储桶列表
+--- PASS: TestBucketListCommand (0.00s)
+    --- PASS: TestBucketListCommand/列出多个存储桶 (0.00s)
+    --- PASS: TestBucketListCommand/空存储桶列表 (0.00s)
+=== RUN   TestBucketCreateCommand
+=== RUN   TestBucketCreateCommand/无参数
+=== RUN   TestBucketCreateCommand/有参数
+=== RUN   TestBucketCreateCommand/参数过多
+--- PASS: TestBucketCreateCommand (0.00s)
+    --- PASS: TestBucketCreateCommand/无参数 (0.00s)
+    --- PASS: TestBucketCreateCommand/有参数 (0.00s)
+    --- PASS: TestBucketCreateCommand/参数过多 (0.00s)
+=== RUN   TestBucketDeleteCommand
+=== RUN   TestBucketDeleteCommand/无参数
+=== RUN   TestBucketDeleteCommand/有参数
+--- PASS: TestBucketDeleteCommand (0.00s)
+    --- PASS: TestBucketDeleteCommand/无参数 (0.00s)
+    --- PASS: TestBucketDeleteCommand/有参数 (0.00s)
+=== RUN   TestBucketInfoCommand
+=== RUN   TestBucketInfoCommand/无参数
+=== RUN   TestBucketInfoCommand/有参数
+--- PASS: TestBucketInfoCommand (0.00s)
+    --- PASS: TestBucketInfoCommand/无参数 (0.00s)
+    --- PASS: TestBucketInfoCommand/有参数 (0.00s)
+=== RUN   TestBucketLocationCommand
+=== RUN   TestBucketLocationCommand/无参数
+=== RUN   TestBucketLocationCommand/有参数
+--- PASS: TestBucketLocationCommand (0.00s)
+    --- PASS: TestBucketLocationCommand/无参数 (0.00s)
+    --- PASS: TestBucketLocationCommand/有参数 (0.00s)
+=== RUN   TestBucketEmptyCommand
+=== RUN   TestBucketEmptyCommand/无参数
+=== RUN   TestBucketEmptyCommand/有参数
+--- PASS: TestBucketEmptyCommand (0.00s)
+    --- PASS: TestBucketEmptyCommand/无参数 (0.00s)
+    --- PASS: TestBucketEmptyCommand/有参数 (0.00s)
+=== RUN   TestBucketSubCommands
+=== RUN   TestBucketSubCommands/子命令存在:list
+=== RUN   TestBucketSubCommands/子命令存在:create
+=== RUN   TestBucketSubCommands/子命令存在:delete
+=== RUN   TestBucketSubCommands/子命令存在:info
+=== RUN   TestBucketSubCommands/子命令存在:location
+=== RUN   TestBucketSubCommands/子命令存在:empty
+--- PASS: TestBucketSubCommands (0.00s)
+    --- PASS: TestBucketSubCommands/子命令存在:list (0.00s)
+    --- PASS: TestBucketSubCommands/子命令存在:create (0.00s)
+    --- PASS: TestBucketSubCommands/子命令存在:delete (0.00s)
+    --- PASS: TestBucketSubCommands/子命令存在:info (0.00s)
+    --- PASS: TestBucketSubCommands/子命令存在:location (0.00s)
+    --- PASS: TestBucketSubCommands/子命令存在:empty (0.00s)
+=== RUN   TestBucketCommandFlags
+--- PASS: TestBucketCommandFlags (0.00s)
+=== RUN   TestBucketCommandIntegration
+--- PASS: TestBucketCommandIntegration (0.00s)
+=== RUN   TestBucketEmptyScenario
+--- PASS: TestBucketEmptyScenario (0.00s)
+=== RUN   TestBucketCreateRegionConfiguration
+=== RUN   TestBucketCreateRegionConfiguration/us-east-1区域不需要配置
+=== RUN   TestBucketCreateRegionConfiguration/其他区域需要配置
+=== RUN   TestBucketCreateRegionConfiguration/空区域使用默认
+--- PASS: TestBucketCreateRegionConfiguration (0.00s)
+    --- PASS: TestBucketCreateRegionConfiguration/us-east-1区域不需要配置 (0.00s)
+    --- PASS: TestBucketCreateRegionConfiguration/其他区域需要配置 (0.00s)
+    --- PASS: TestBucketCreateRegionConfiguration/空区域使用默认 (0.00s)
+=== RUN   TestBucketCommandOutput
+--- PASS: TestBucketCommandOutput (0.00s)
+=== RUN   TestMultipartInitCommand
+=== RUN   TestMultipartInitCommand/无参数
+=== RUN   TestMultipartInitCommand/缺少key参数
+=== RUN   TestMultipartInitCommand/完整参数
+--- PASS: TestMultipartInitCommand (0.00s)
+    --- PASS: TestMultipartInitCommand/无参数 (0.00s)
+    --- PASS: TestMultipartInitCommand/缺少key参数 (0.00s)
+    --- PASS: TestMultipartInitCommand/完整参数 (0.00s)
+=== RUN   TestMultipartUploadCommand
+=== RUN   TestMultipartUploadCommand/无参数
+=== RUN   TestMultipartUploadCommand/缺少upload-id参数
+=== RUN   TestMultipartUploadCommand/缺少part-number参数
+=== RUN   TestMultipartUploadCommand/缺少file参数
+=== RUN   TestMultipartUploadCommand/完整参数
+=== RUN   TestMultipartUploadCommand/无效的分片编号
+--- PASS: TestMultipartUploadCommand (0.00s)
+    --- PASS: TestMultipartUploadCommand/无参数 (0.00s)
+    --- PASS: TestMultipartUploadCommand/缺少upload-id参数 (0.00s)
+    --- PASS: TestMultipartUploadCommand/缺少part-number参数 (0.00s)
+    --- PASS: TestMultipartUploadCommand/缺少file参数 (0.00s)
+    --- PASS: TestMultipartUploadCommand/完整参数 (0.00s)
+    --- PASS: TestMultipartUploadCommand/无效的分片编号 (0.00s)
+=== RUN   TestMultipartListCommand
+=== RUN   TestMultipartListCommand/无参数
+=== RUN   TestMultipartListCommand/缺少key参数
+=== RUN   TestMultipartListCommand/缺少upload-id参数
+=== RUN   TestMultipartListCommand/完整参数
+--- PASS: TestMultipartListCommand (0.00s)
+    --- PASS: TestMultipartListCommand/无参数 (0.00s)
+    --- PASS: TestMultipartListCommand/缺少key参数 (0.00s)
+    --- PASS: TestMultipartListCommand/缺少upload-id参数 (0.00s)
+    --- PASS: TestMultipartListCommand/完整参数 (0.00s)
+=== RUN   TestMultipartCompleteCommand
+=== RUN   TestMultipartCompleteCommand/无参数
+=== RUN   TestMultipartCompleteCommand/缺少key参数
+=== RUN   TestMultipartCompleteCommand/缺少upload-id参数
+=== RUN   TestMultipartCompleteCommand/完整参数
+--- PASS: TestMultipartCompleteCommand (0.00s)
+    --- PASS: TestMultipartCompleteCommand/无参数 (0.00s)
+    --- PASS: TestMultipartCompleteCommand/缺少key参数 (0.00s)
+    --- PASS: TestMultipartCompleteCommand/缺少upload-id参数 (0.00s)
+    --- PASS: TestMultipartCompleteCommand/完整参数 (0.00s)
+=== RUN   TestMultipartAbortCommand
+=== RUN   TestMultipartAbortCommand/无参数
+=== RUN   TestMultipartAbortCommand/缺少key参数
+=== RUN   TestMultipartAbortCommand/缺少upload-id参数
+=== RUN   TestMultipartAbortCommand/完整参数
+--- PASS: TestMultipartAbortCommand (0.00s)
+    --- PASS: TestMultipartAbortCommand/无参数 (0.00s)
+    --- PASS: TestMultipartAbortCommand/缺少key参数 (0.00s)
+    --- PASS: TestMultipartAbortCommand/缺少upload-id参数 (0.00s)
+    --- PASS: TestMultipartAbortCommand/完整参数 (0.00s)
+=== RUN   TestMultipartSubCommands
+=== RUN   TestMultipartSubCommands/子命令存在:init
+=== RUN   TestMultipartSubCommands/子命令存在:upload
+=== RUN   TestMultipartSubCommands/子命令存在:list
+=== RUN   TestMultipartSubCommands/子命令存在:complete
+=== RUN   TestMultipartSubCommands/子命令存在:abort
+--- PASS: TestMultipartSubCommands (0.00s)
+    --- PASS: TestMultipartSubCommands/子命令存在:init (0.00s)
+    --- PASS: TestMultipartSubCommands/子命令存在:upload (0.00s)
+    --- PASS: TestMultipartSubCommands/子命令存在:list (0.00s)
+    --- PASS: TestMultipartSubCommands/子命令存在:complete (0.00s)
+    --- PASS: TestMultipartSubCommands/子命令存在:abort (0.00s)
+=== RUN   TestMultipartCommandFlags
+=== RUN   TestMultipartCommandFlags/multipart_upload_flags
+--- PASS: TestMultipartCommandFlags (0.00s)
+    --- PASS: TestMultipartCommandFlags/multipart_upload_flags (0.00s)
+=== RUN   TestMultipartPartSizeFlag
+--- PASS: TestMultipartPartSizeFlag (0.00s)
+=== RUN   TestMultipartCommandHelp
+=== RUN   TestMultipartCommandHelp/初始化一个大文件的多部分上传
+=== RUN   TestMultipartCommandHelp/上传多部分上传的一个分片
+=== RUN   TestMultipartCommandHelp/列出多部分上传的所有已上传分片
+=== RUN   TestMultipartCommandHelp/完成多部分上传
+=== RUN   TestMultipartCommandHelp/中止一个进行中的多部分上传
+--- PASS: TestMultipartCommandHelp (0.00s)
+    --- PASS: TestMultipartCommandHelp/初始化一个大文件的多部分上传 (0.00s)
+    --- PASS: TestMultipartCommandHelp/上传多部分上传的一个分片 (0.00s)
+    --- PASS: TestMultipartCommandHelp/列出多部分上传的所有已上传分片 (0.00s)
+    --- PASS: TestMultipartCommandHelp/完成多部分上传 (0.00s)
+    --- PASS: TestMultipartCommandHelp/中止一个进行中的多部分上传 (0.00s)
+=== RUN   TestMultipartPartSizeConfiguration
+--- PASS: TestMultipartPartSizeConfiguration (0.00s)
+=== RUN   TestObjectListCommand
+=== RUN   TestObjectListCommand/无参数
+=== RUN   TestObjectListCommand/有参数
+=== RUN   TestObjectListCommand/参数过多
+--- PASS: TestObjectListCommand (0.00s)
+    --- PASS: TestObjectListCommand/无参数 (0.00s)
+    --- PASS: TestObjectListCommand/有参数 (0.00s)
+    --- PASS: TestObjectListCommand/参数过多 (0.00s)
+=== RUN   TestObjectPutCommand
+=== RUN   TestObjectPutCommand/无参数
+=== RUN   TestObjectPutCommand/缺少文件参数
+=== RUN   TestObjectPutCommand/完整参数
+=== RUN   TestObjectPutCommand/参数过多
+--- PASS: TestObjectPutCommand (0.00s)
+    --- PASS: TestObjectPutCommand/无参数 (0.00s)
+    --- PASS: TestObjectPutCommand/缺少文件参数 (0.00s)
+    --- PASS: TestObjectPutCommand/完整参数 (0.00s)
+    --- PASS: TestObjectPutCommand/参数过多 (0.00s)
+=== RUN   TestObjectGetCommand
+=== RUN   TestObjectGetCommand/无参数
+=== RUN   TestObjectGetCommand/缺少本地文件参数
+=== RUN   TestObjectGetCommand/完整参数
+--- PASS: TestObjectGetCommand (0.00s)
+    --- PASS: TestObjectGetCommand/无参数 (0.00s)
+    --- PASS: TestObjectGetCommand/缺少本地文件参数 (0.00s)
+    --- PASS: TestObjectGetCommand/完整参数 (0.00s)
+=== RUN   TestObjectDeleteCommand
+=== RUN   TestObjectDeleteCommand/无参数
+=== RUN   TestObjectDeleteCommand/缺少key参数
+=== RUN   TestObjectDeleteCommand/完整参数
+--- PASS: TestObjectDeleteCommand (0.00s)
+    --- PASS: TestObjectDeleteCommand/无参数 (0.00s)
+    --- PASS: TestObjectDeleteCommand/缺少key参数 (0.00s)
+    --- PASS: TestObjectDeleteCommand/完整参数 (0.00s)
+=== RUN   TestObjectCopyCommand
+=== RUN   TestObjectCopyCommand/无参数
+=== RUN   TestObjectCopyCommand/缺少目标参数
+=== RUN   TestObjectCopyCommand/完整参数
+--- PASS: TestObjectCopyCommand (0.00s)
+    --- PASS: TestObjectCopyCommand/无参数 (0.00s)
+    --- PASS: TestObjectCopyCommand/缺少目标参数 (0.00s)
+    --- PASS: TestObjectCopyCommand/完整参数 (0.00s)
+=== RUN   TestObjectInfoCommand
+=== RUN   TestObjectInfoCommand/无参数
+=== RUN   TestObjectInfoCommand/缺少key参数
+=== RUN   TestObjectInfoCommand/完整参数
+--- PASS: TestObjectInfoCommand (0.00s)
+    --- PASS: TestObjectInfoCommand/无参数 (0.00s)
+    --- PASS: TestObjectInfoCommand/缺少key参数 (0.00s)
+    --- PASS: TestObjectInfoCommand/完整参数 (0.00s)
+=== RUN   TestObjectUrlCommand
+=== RUN   TestObjectUrlCommand/无参数
+=== RUN   TestObjectUrlCommand/缺少key参数
+=== RUN   TestObjectUrlCommand/完整参数
+--- PASS: TestObjectUrlCommand (0.00s)
+    --- PASS: TestObjectUrlCommand/无参数 (0.00s)
+    --- PASS: TestObjectUrlCommand/缺少key参数 (0.00s)
+    --- PASS: TestObjectUrlCommand/完整参数 (0.00s)
+=== RUN   TestObjectMvCommand
+=== RUN   TestObjectMvCommand/无参数
+=== RUN   TestObjectMvCommand/缺少目标key参数
+=== RUN   TestObjectMvCommand/完整参数
+--- PASS: TestObjectMvCommand (0.00s)
+    --- PASS: TestObjectMvCommand/无参数 (0.00s)
+    --- PASS: TestObjectMvCommand/缺少目标key参数 (0.00s)
+    --- PASS: TestObjectMvCommand/完整参数 (0.00s)
+=== RUN   TestObjectSubCommands
+=== RUN   TestObjectSubCommands/子命令存在:list
+=== RUN   TestObjectSubCommands/子命令存在:put
+=== RUN   TestObjectSubCommands/子命令存在:get
+=== RUN   TestObjectSubCommands/子命令存在:delete
+=== RUN   TestObjectSubCommands/子命令存在:copy
+=== RUN   TestObjectSubCommands/子命令存在:info
+=== RUN   TestObjectSubCommands/子命令存在:url
+=== RUN   TestObjectSubCommands/子命令存在:mv
+--- PASS: TestObjectSubCommands (0.00s)
+    --- PASS: TestObjectSubCommands/子命令存在:list (0.00s)
+    --- PASS: TestObjectSubCommands/子命令存在:put (0.00s)
+    --- PASS: TestObjectSubCommands/子命令存在:get (0.00s)
+    --- PASS: TestObjectSubCommands/子命令存在:delete (0.00s)
+    --- PASS: TestObjectSubCommands/子命令存在:copy (0.00s)
+    --- PASS: TestObjectSubCommands/子命令存在:info (0.00s)
+    --- PASS: TestObjectSubCommands/子命令存在:url (0.00s)
+    --- PASS: TestObjectSubCommands/子命令存在:mv (0.00s)
+=== RUN   TestObjectCommandFlags
+=== RUN   TestObjectCommandFlags/object_list_flags
+=== RUN   TestObjectCommandFlags/object_put_flags
+--- PASS: TestObjectCommandFlags (0.00s)
+    --- PASS: TestObjectCommandFlags/object_list_flags (0.00s)
+    --- PASS: TestObjectCommandFlags/object_put_flags (0.00s)
+=== RUN   TestFormatBytes
+=== RUN   TestFormatBytes/0_B
+=== RUN   TestFormatBytes/512_B
+=== RUN   TestFormatBytes/1.0_KB
+=== RUN   TestFormatBytes/1.0_MB
+=== RUN   TestFormatBytes/1.0_GB
+=== RUN   TestFormatBytes/1.5_KB
+=== RUN   TestFormatBytes/5.0_MB
+--- PASS: TestFormatBytes (0.00s)
+    --- PASS: TestFormatBytes/0_B (0.00s)
+    --- PASS: TestFormatBytes/512_B (0.00s)
+    --- PASS: TestFormatBytes/1.0_KB (0.00s)
+    --- PASS: TestFormatBytes/1.0_MB (0.00s)
+    --- PASS: TestFormatBytes/1.0_GB (0.00s)
+    --- PASS: TestFormatBytes/1.5_KB (0.00s)
+    --- PASS: TestFormatBytes/5.0_MB (0.00s)
+=== RUN   TestObjectCommandHelp
+=== RUN   TestObjectCommandHelp/列出存储桶中的对象
+=== RUN   TestObjectCommandHelp/上传本地文件到_S3_存储桶
+=== RUN   TestObjectCommandHelp/对象相关操作
+--- PASS: TestObjectCommandHelp (0.00s)
+    --- PASS: TestObjectCommandHelp/列出存储桶中的对象 (0.00s)
+    --- PASS: TestObjectCommandHelp/上传本地文件到_S3_存储桶 (0.00s)
+    --- PASS: TestObjectCommandHelp/对象相关操作 (0.00s)
+=== RUN   TestObjectPutLargeFile
+--- PASS: TestObjectPutLargeFile (0.00s)
+=== RUN   TestPresignGetCommand
+=== RUN   TestPresignGetCommand/无参数
+=== RUN   TestPresignGetCommand/缺少key参数
+=== RUN   TestPresignGetCommand/完整参数
+--- PASS: TestPresignGetCommand (0.00s)
+    --- PASS: TestPresignGetCommand/无参数 (0.00s)
+    --- PASS: TestPresignGetCommand/缺少key参数 (0.00s)
+    --- PASS: TestPresignGetCommand/完整参数 (0.00s)
+=== RUN   TestPresignPutCommand
+=== RUN   TestPresignPutCommand/无参数
+=== RUN   TestPresignPutCommand/缺少key参数
+=== RUN   TestPresignPutCommand/完整参数
+--- PASS: TestPresignPutCommand (0.00s)
+    --- PASS: TestPresignPutCommand/无参数 (0.00s)
+    --- PASS: TestPresignPutCommand/缺少key参数 (0.00s)
+    --- PASS: TestPresignPutCommand/完整参数 (0.00s)
+=== RUN   TestPresignDeleteCommand
+=== RUN   TestPresignDeleteCommand/无参数
+=== RUN   TestPresignDeleteCommand/缺少key参数
+=== RUN   TestPresignDeleteCommand/完整参数
+--- PASS: TestPresignDeleteCommand (0.00s)
+    --- PASS: TestPresignDeleteCommand/无参数 (0.00s)
+    --- PASS: TestPresignDeleteCommand/缺少key参数 (0.00s)
+    --- PASS: TestPresignDeleteCommand/完整参数 (0.00s)
+=== RUN   TestPresignSubCommands
+=== RUN   TestPresignSubCommands/子命令存在:get
+=== RUN   TestPresignSubCommands/子命令存在:put
+=== RUN   TestPresignSubCommands/子命令存在:delete
+--- PASS: TestPresignSubCommands (0.00s)
+    --- PASS: TestPresignSubCommands/子命令存在:get (0.00s)
+    --- PASS: TestPresignSubCommands/子命令存在:put (0.00s)
+    --- PASS: TestPresignSubCommands/子命令存在:delete (0.00s)
+=== RUN   TestPresignCommandFlags
+=== RUN   TestPresignCommandFlags/expires
+=== RUN   TestPresignCommandFlags/expires#01
+=== RUN   TestPresignCommandFlags/expires#02
+--- PASS: TestPresignCommandFlags (0.00s)
+    --- PASS: TestPresignCommandFlags/expires (0.00s)
+    --- PASS: TestPresignCommandFlags/expires#01 (0.00s)
+    --- PASS: TestPresignCommandFlags/expires#02 (0.00s)
+=== RUN   TestPresignExpiresFlag
+--- PASS: TestPresignExpiresFlag (0.00s)
+=== RUN   TestPresignCommandHelp
+=== RUN   TestPresignCommandHelp/生成用于下载对象的预签名URL
+=== RUN   TestPresignCommandHelp/生成用于上传对象的预签名URL
+=== RUN   TestPresignCommandHelp/生成用于删除对象的预签名URL
+=== RUN   TestPresignCommandHelp/预签名URL
+--- PASS: TestPresignCommandHelp (0.00s)
+    --- PASS: TestPresignCommandHelp/生成用于下载对象的预签名URL (0.00s)
+    --- PASS: TestPresignCommandHelp/生成用于上传对象的预签名URL (0.00s)
+    --- PASS: TestPresignCommandHelp/生成用于删除对象的预签名URL (0.00s)
+    --- PASS: TestPresignCommandHelp/预签名URL (0.00s)
+=== RUN   TestPresignExpiresBoundary
+--- PASS: TestPresignExpiresBoundary (0.00s)
+=== RUN   TestPresignCommandDescriptions
+--- PASS: TestPresignCommandDescriptions (0.00s)
+=== RUN   TestRootCommand
+=== RUN   TestRootCommand/显示帮助信息
+=== RUN   TestRootCommand/显示版本/帮助
+--- PASS: TestRootCommand (0.00s)
+    --- PASS: TestRootCommand/显示帮助信息 (0.00s)
+    --- PASS: TestRootCommand/显示版本/帮助 (0.00s)
+=== RUN   TestRootCommand_ConfigFile
+=== RUN   TestRootCommand_ConfigFile/加载有效配置
+=== RUN   TestRootCommand_ConfigFile/空配置使用默认值
+--- PASS: TestRootCommand_ConfigFile (0.00s)
+    --- PASS: TestRootCommand_ConfigFile/加载有效配置 (0.00s)
+    --- PASS: TestRootCommand_ConfigFile/空配置使用默认值 (0.00s)
+=== RUN   TestRootCommand_SubCommands
+=== RUN   TestRootCommand_SubCommands/子命令存在:bucket
+=== RUN   TestRootCommand_SubCommands/子命令存在:object
+=== RUN   TestRootCommand_SubCommands/子命令存在:presign
+=== RUN   TestRootCommand_SubCommands/子命令存在:multipart
+=== RUN   TestRootCommand_SubCommands/子命令存在:policy
+=== RUN   TestRootCommand_SubCommands/子命令存在:lifecycle
+=== RUN   TestRootCommand_SubCommands/子命令存在:versioning
+=== RUN   TestRootCommand_SubCommands/子命令存在:tags
+=== RUN   TestRootCommand_SubCommands/子命令存在:website
+=== RUN   TestRootCommand_SubCommands/子命令存在:cors
+=== RUN   TestRootCommand_SubCommands/子命令存在:acl
+=== RUN   TestRootCommand_SubCommands/子命令存在:logging
+=== RUN   TestRootCommand_SubCommands/子命令存在:encryption
+=== RUN   TestRootCommand_SubCommands/子命令存在:replication
+=== RUN   TestRootCommand_SubCommands/子命令存在:notification
+=== RUN   TestRootCommand_SubCommands/子命令存在:init
+--- PASS: TestRootCommand_SubCommands (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:bucket (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:object (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:presign (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:multipart (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:policy (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:lifecycle (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:versioning (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:tags (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:website (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:cors (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:acl (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:logging (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:encryption (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:replication (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:notification (0.00s)
+    --- PASS: TestRootCommand_SubCommands/子命令存在:init (0.00s)
+=== RUN   TestRootCommand_GlobalFlags
+--- PASS: TestRootCommand_GlobalFlags (0.00s)
+=== RUN   TestCommandArgumentParsing
+=== RUN   TestCommandArgumentParsing/bucket_create_无参数
+=== RUN   TestCommandArgumentParsing/bucket_create_有参数
+=== RUN   TestCommandArgumentParsing/bucket_delete_无参数
+=== RUN   TestCommandArgumentParsing/object_list_无参数
+=== RUN   TestCommandArgumentParsing/object_list_有参数
+--- PASS: TestCommandArgumentParsing (0.00s)
+    --- PASS: TestCommandArgumentParsing/bucket_create_无参数 (0.00s)
+    --- PASS: TestCommandArgumentParsing/bucket_create_有参数 (0.00s)
+    --- PASS: TestCommandArgumentParsing/bucket_delete_无参数 (0.00s)
+    --- PASS: TestCommandArgumentParsing/object_list_无参数 (0.00s)
+    --- PASS: TestCommandArgumentParsing/object_list_有参数 (0.00s)
+PASS
+ok  	s3tool/cmd	0.047s
